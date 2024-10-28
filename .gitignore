@@ -9,3 +9,11 @@
 /DemoElasticKibana/DemoElasticKibana/obj/Debug/net8.0/DemoElasticKibana.assets.cache
 /DemoElasticKibana/DemoElasticKibana/obj/Debug/net8.0/DemoElasticKibana.GeneratedMSBuildEditorConfig.editorconfig
 /DemoElasticKibana/DemoElasticKibana/obj/DemoElasticKibana.csproj.nuget.dgspec.json
+# Ignore bin and obj directories
+bin/
+obj/
+
+# Ignore debug folder (nếu tồn tại)
+debug/
+
+.vs/
