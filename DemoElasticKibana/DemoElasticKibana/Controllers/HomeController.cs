@@ -1,4 +1,4 @@
-using DemoElasticKibana.ElasticSearch;
+using DemoElasticKibana.Configs.ElasticSearch;
 using DemoElasticKibana.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

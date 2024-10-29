@@ -1,7 +1,6 @@
-﻿
-using Nest;
+﻿using Nest;
 
-namespace DemoElasticKibana.ElasticSearch
+namespace DemoElasticKibana.Configs.ElasticSearch
 {
     public class ElasticSearchService<T> : IElasticSeachService<T> where T : class
     {

@@ -1,4 +1,4 @@
-﻿namespace DemoElasticKibana.ElasticSearch
+﻿namespace DemoElasticKibana.Configs.ElasticSearch
 {
     public interface IElasticSeachService<T> where T : class
     {
