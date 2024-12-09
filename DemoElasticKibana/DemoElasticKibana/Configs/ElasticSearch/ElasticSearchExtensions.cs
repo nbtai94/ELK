@@ -4,7 +4,7 @@ using Nest;
 
 namespace DemoElasticKibana.Configs.ElasticSearch
 {
-    public static class ElasticSearchClient
+    public static class ElasticSearchExtensions
     {
         public static void AddElasticSearch(this IServiceCollection services)
         {

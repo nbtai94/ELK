@@ -7,6 +7,7 @@ using DemoElasticKibana.Configs;
 using Microsoft.Extensions.Options;
 using DemoElasticKibana.Configs.Serilog;
 using DemoElasticKibana.Configs.ElasticSearch;
+using DemoElasticKibana.Configs.RabbitMQ;
 
 namespace DemoElasticKibana
 {
@@ -19,21 +20,27 @@ namespace DemoElasticKibana
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             // Add configs
-            builder.Services.Configure<ElasticSearchOptions>(builder.Configuration.GetSection("ElasticSearch"));
-            builder.Services.Configure<SerilogOptions>(builder.Configuration.GetSection("Serilog"));
+            builder.Services.AddConfigOptions(builder.Configuration);
 
             // Add elastic search
             builder.Services.AddElasticSearch();
+            // Add rabbitMQ
+            builder.Services.AddRabbitMQ();
+            builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
             builder.Services.AddSingleton(typeof(IElasticSeachService<>), typeof(ElasticSearchService<>));
 
             SerilogConfig.Config(builder);
 
             builder.Host.UseSerilog();
 
+
             var app = builder.Build();
 
+            app.StartConsumer();
+  
             // Sử dụng Serilog cho ASP.NET Core
-            app.UseMiddleware<SerilogMiddleWare>();
+            //app.UseMiddleware<SerilogMiddleWare>();
+            app.UseSerilogRequestLogging();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

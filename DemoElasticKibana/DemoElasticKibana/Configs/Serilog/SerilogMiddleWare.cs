@@ -7,9 +7,11 @@ namespace DemoElasticKibana.Configs.Serilog
     public class SerilogMiddleWare
     {
         private readonly RequestDelegate _next;
-        public SerilogMiddleWare(RequestDelegate next)
+        private readonly ILogger<SerilogMiddleWare> _logger;
+        public SerilogMiddleWare(RequestDelegate next, ILogger<SerilogMiddleWare> logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task Invoke(HttpContext context)
@@ -37,10 +39,7 @@ namespace DemoElasticKibana.Configs.Serilog
             context.Response.Body.Seek(0, SeekOrigin.Begin);
 
             // Log thông tin request và response
-            Log.Information("Request in {Duration}ms\nRequest: {RequestBody}\nResponse: {ResponseBody}",
-                //context.Request.Method,
-                //context.Request.Path,
-                //context.Response.StatusCode,
+            _logger.LogInformation("Request in {Duration}ms\nRequest: {RequestBody}\nResponse: {ResponseBody}",
                 (responseTime - requestTime).TotalMilliseconds,
                 requestBody,
                 responseText);

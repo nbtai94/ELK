@@ -5,6 +5,7 @@
         public AppSettings() { }
         ElasticSearchOptions ElasticSearch { get; set; }
         SerilogOptions Serilog { get; set; }
+        RabbitMQOptions RabbitMQ { get; set; }
     }
 
     public class ElasticSearchOptions
@@ -14,10 +15,23 @@
 
     public class SerilogOptions
     {
-        public string MinimumLevel { get; set; }
+        public MinimumLevelOption MinimumLevel { get; set; }
         public List<WriteToOption> WriteTo { get; set; }
         public List<string> Enrich { get; set; }
         public Dictionary<string, string> Properties { get; set; }
+    }
+
+    public class MinimumLevelOption
+    {
+        public string Default { get; set; }
+        public OverrideOption Override { get; set; }
+
+    }
+
+    public class OverrideOption
+    {
+        public string Microsoft { get; set; }
+        public string System { get; set; }
     }
 
     public class WriteToOption
@@ -34,5 +48,14 @@
         public string templateName { get; set; }
         public int numberOfShards { get; set; }
         public int numberOfReplicas { get; set; }
+    }
+
+    public class RabbitMQOptions
+    {
+        public string Host { get; set; }
+        public int Port { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string VirtualHost { get; set; }
     }
 }

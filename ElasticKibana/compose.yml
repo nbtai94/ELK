@@ -27,10 +27,25 @@ services:
       - ELASTICSEARCH_HOSTS=http://elastic:9200
     networks:
       - elastic
-
+  
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"  # Web management UI
+      - "5672:5672"    # RabbitMQ client connections
+    environment:
+      RABBITMQ_DEFAULT_USER: user  # Set default username
+      RABBITMQ_DEFAULT_PASS: password  # Set default password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq  # Persist data across restarts
+    restart: always
+    
 networks:
   elastic:
     driver: bridge
     
 volumes:
   elastic-data:
+  rabbitmq_data:
+    driver: local
